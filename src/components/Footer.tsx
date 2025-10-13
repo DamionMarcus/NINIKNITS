@@ -1,0 +1,213 @@
+import { motion } from 'motion/react';
+import { Heart, Mail, Phone, MapPin, Instagram, Facebook, Youtube } from 'lucide-react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+
+export function Footer() {
+  const socialLinks = [
+    { icon: Instagram, href: 'https://www.instagram.com/snug.crochet.by.nini?igsh=MW5jbHJkYzY5Mm9qYQ%3D%3D&utm_source=qr', label: 'Instagram' },
+    { icon: Facebook, href: '#', label: 'Facebook' },
+    { icon: Youtube, href: '#', label: 'YouTube' }
+  ];
+
+  const quickLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'Products', href: '#products' },
+    { name: 'About', href: '#about' },
+    { name: 'Contact', href: '#contact' }
+  ];
+
+  const supportLinks = [
+    { name: 'Care Instructions', href: '#' },
+    { name: 'Custom Orders', href: '#' },
+    { name: 'Returns & Exchanges', href: '#' },
+    { name: 'Size Guide', href: '#' }
+  ];
+
+  return (
+    <footer id="contact" className="bg-gradient-to-b from-pink-50 to-purple-100">
+      {/* Newsletter Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="border-b border-pink-200"
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          <div className="max-w-2xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="flex items-center justify-center space-x-2 mb-4"
+            >
+              <Heart className="w-6 h-6 text-pink-500" />
+              <span className="text-pink-500 tracking-wide">Stay Connected</span>
+            </motion.div>
+            
+            <h3 className="text-2xl sm:text-3xl mb-4">
+              Join Our Crafting Community
+            </h3>
+            
+            <p className="text-muted-foreground mb-8">
+              Be the first to discover new patterns, exclusive designs, and behind-the-scenes stories. 
+              Plus, get 10% off your first order!
+            </p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+            >
+              <Input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1"
+              />
+              <Button className="bg-pink-500 hover:bg-pink-600">
+                Subscribe
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Main Footer */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Brand Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:col-span-2"
+          >
+            <div className="flex items-center space-x-2 mb-6">
+              <Heart className="w-8 h-8 text-purple-500" />
+              <span className="text-xl tracking-wide font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Nini's Knits</span>
+            </div>
+            
+            <p className="text-muted-foreground mb-6 max-w-md">
+              Handcrafted crochet pieces made with love and attention to detail. 
+              Each creation tells a story and brings warmth to your home.
+            </p>
+
+            {/* Contact Info */}
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <div className="flex items-center space-x-3">
+                <Mail className="w-4 h-4 text-purple-500" />
+                <span>hello@ninisknits.com</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-4 h-4 text-purple-500" />
+                <span>Contact via Instagram</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <MapPin className="w-4 h-4 text-purple-500" />
+                <span>Handmade with Love</span>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center space-x-4 mt-6">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  whileHover={{ y: -2, scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-pink-500 hover:bg-pink-500 hover:text-white transition-colors shadow-md"
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-5 h-5" />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="mb-6">Quick Links</h4>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <motion.a
+                    href={link.href}
+                    whileHover={{ x: 5 }}
+                    className="text-muted-foreground hover:text-pink-500 transition-colors text-sm"
+                  >
+                    {link.name}
+                  </motion.a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Support Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="mb-6">Customer Care</h4>
+            <ul className="space-y-3">
+              {supportLinks.map((link) => (
+                <li key={link.name}>
+                  <motion.a
+                    href={link.href}
+                    whileHover={{ x: 5 }}
+                    className="text-muted-foreground hover:text-pink-500 transition-colors text-sm"
+                  >
+                    {link.name}
+                  </motion.a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="border-t border-pink-200 bg-white/50"
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
+            <p>© 2024 Nini's Knits. All rights reserved. Made with ❤️ and countless hours of love.</p>
+            <div className="flex space-x-6 mt-4 sm:mt-0">
+              <motion.a
+                href="#"
+                whileHover={{ y: -1 }}
+                className="hover:text-pink-500 transition-colors"
+              >
+                Privacy Policy
+              </motion.a>
+              <motion.a
+                href="#"
+                whileHover={{ y: -1 }}
+                className="hover:text-pink-500 transition-colors"
+              >
+                Terms of Service
+              </motion.a>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </footer>
+  );
+}
