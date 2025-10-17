@@ -62,8 +62,8 @@ export function FeaturedProducts({ onNavigateToProducts }: FeaturedProductsProps
           </p>
         </motion.div>
 
-        {/* Products List - Mobile First Layout */}
-        <div className="space-y-6 lg:space-y-0">
+        {/* Products List - Alternating Layout */}
+        <div className="space-y-12 lg:space-y-20">
           {featuredProducts.map((product, index) => (
             <ProductCard
               key={product.id}

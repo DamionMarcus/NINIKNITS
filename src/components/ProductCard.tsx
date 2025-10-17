@@ -36,7 +36,7 @@ export function ProductCard({
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-4 lg:gap-8 mb-8 lg:mb-16`}
+      className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-6 lg:gap-12 items-center`}
     >
       {/* Product Image */}
       <motion.div
@@ -46,7 +46,7 @@ export function ProductCard({
         onClick={onClick}
         className="relative cursor-pointer group lg:w-1/2"
       >
-        <div className="relative aspect-square lg:aspect-[4/3] overflow-hidden rounded-2xl shadow-lg">
+        <div className="relative aspect-[3/4] sm:aspect-square lg:aspect-[4/3] overflow-hidden rounded-2xl shadow-lg max-w-sm mx-auto lg:max-w-none">
           <ImageWithFallback
             src={image}
             alt={name}
@@ -76,7 +76,7 @@ export function ProductCard({
         initial={{ opacity: 0, x: isReversed ? 50 : -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
-        className="lg:w-1/2 flex flex-col justify-center space-y-4 lg:space-y-6"
+        className="lg:w-1/2 flex flex-col justify-center space-y-4 lg:space-y-6 text-center lg:text-left"
       >
         {/* Product Name & Price */}
         <div className="space-y-2">
@@ -112,7 +112,7 @@ export function ProductCard({
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={onClick}
-          className="self-start bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium"
+          className="self-center lg:self-start bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium"
         >
           View Details
         </motion.button>

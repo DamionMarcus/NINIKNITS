@@ -5,9 +5,10 @@ import { Button } from './ui/button';
 
 interface HeaderProps {
   onNavigateToProducts?: () => void;
+  onScrollToSection?: (sectionId: string) => void;
 }
 
-export function Header({ onNavigateToProducts }: HeaderProps) {
+export function Header({ onNavigateToProducts, onScrollToSection }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -15,7 +16,7 @@ export function Header({ onNavigateToProducts }: HeaderProps) {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border shadow-sm"
+      className="fixed top-0 left-0 right-0 z-[100] bg-white/95 backdrop-blur-md border-b border-border shadow-sm"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 md:h-16">
@@ -24,26 +25,38 @@ export function Header({ onNavigateToProducts }: HeaderProps) {
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-2"
           >
-            <Heart className="w-6 h-6 md:w-8 md:h-8 text-purple-500" />
+            <motion.img 
+              src="/images/animated-cat-logo.png"
+              alt="Nini's Knits Cat"
+              className="w-8 h-8 md:w-10 md:h-10"
+              animate={{ 
+                rotate: [0, 5, -5, 0],
+                y: [0, -2, 0]
+              }}
+              transition={{ 
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
             <span className="text-lg md:text-xl tracking-wide font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Nini's Knits</span>
           </motion.div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {[
-              { name: 'Home', href: '#home' },
+              { name: 'Home', section: 'home' },
               { name: 'Products', action: 'products' },
-              { name: 'About', href: '#about' },
-              { name: 'Contact', href: '#contact' }
+              { name: 'About', section: 'about' },
+              { name: 'Contact', section: 'contact' }
             ].map((item) => (
               <motion.button
                 key={item.name}
                 onClick={() => {
                   if (item.action === 'products' && onNavigateToProducts) {
                     onNavigateToProducts();
-                  } else if (item.href) {
-                    const element = document.querySelector(item.href);
-                    element?.scrollIntoView({ behavior: 'smooth' });
+                  } else if (item.section && onScrollToSection) {
+                    onScrollToSection(item.section);
                   }
                 }}
                 className="text-foreground hover:text-purple-500 transition-colors relative"

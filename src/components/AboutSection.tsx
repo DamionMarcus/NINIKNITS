@@ -51,7 +51,7 @@ export function AboutSection() {
               viewport={{ once: true }}
               className="mb-6"
             >
-              <span className="text-pink-500 tracking-wide">About StitchCraft</span>
+              <span className="text-pink-500 tracking-wide">About Nini's Knits</span>
             </motion.div>
 
             <motion.h2
