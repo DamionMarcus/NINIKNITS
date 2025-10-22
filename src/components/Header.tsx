@@ -19,7 +19,7 @@ export function Header({ onNavigateToProducts, onScrollToSection }: HeaderProps)
       className="fixed top-0 left-0 right-0 z-[100] bg-white/95 backdrop-blur-md border-b border-border shadow-sm"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 md:h-16">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <motion.div 
             whileHover={{ scale: 1.05 }}
@@ -39,7 +39,7 @@ export function Header({ onNavigateToProducts, onScrollToSection }: HeaderProps)
                 ease: "easeInOut"
               }}
             />
-            <span className="text-lg md:text-xl tracking-wide font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Nini's Knits</span>
+            <span className="text-lg md:text-xl tracking-wide font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Snug.crochet.by.nini</span>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -105,23 +105,22 @@ export function Header({ onNavigateToProducts, onScrollToSection }: HeaderProps)
         >
           <div className="py-4 space-y-4">
             {[
-              { name: 'Home', href: '#home' },
+              { name: 'Home', section: 'home' },
               { name: 'Products', action: 'products' },
-              { name: 'About', href: '#about' },
-              { name: 'Contact', href: '#contact' }
+              { name: 'About', section: 'about' },
+              { name: 'Contact', section: 'contact' }
             ].map((item) => (
               <motion.button
                 key={item.name}
                 onClick={() => {
                   if (item.action === 'products' && onNavigateToProducts) {
                     onNavigateToProducts();
-                  } else if (item.href) {
-                    const element = document.querySelector(item.href);
-                    element?.scrollIntoView({ behavior: 'smooth' });
+                  } else if (item.section && onScrollToSection) {
+                    onScrollToSection(item.section);
                   }
                   setIsMenuOpen(false);
                 }}
-                className="block w-full text-left text-foreground hover:text-purple-500 transition-colors"
+                className="block w-full text-left text-foreground hover:text-purple-500 transition-colors py-2"
                 whileHover={{ x: 10 }}
               >
                 {item.name}

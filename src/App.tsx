@@ -26,7 +26,7 @@ export default function App() {
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
-          const headerHeight = 64; // Account for fixed header
+          const headerHeight = window.innerWidth >= 768 ? 80 : 70; // Responsive header height
           const elementPosition = element.offsetTop - headerHeight;
           window.scrollTo({ top: elementPosition, behavior: 'smooth' });
         }
@@ -34,7 +34,7 @@ export default function App() {
     } else {
       const element = document.getElementById(sectionId);
       if (element) {
-        const headerHeight = 64; // Account for fixed header
+        const headerHeight = window.innerWidth >= 768 ? 80 : 70; // Responsive header height
         const elementPosition = element.offsetTop - headerHeight;
         window.scrollTo({ top: elementPosition, behavior: 'smooth' });
       }
@@ -45,7 +45,7 @@ export default function App() {
     return (
       <div className="min-h-screen">
         <Header onNavigateToProducts={navigateToProducts} onScrollToSection={scrollToSection} />
-        <main className="pt-16">
+        <main className="pt-20 md:pt-24">
           <ProductsPage onBack={navigateToHome} />
         </main>
       </div>

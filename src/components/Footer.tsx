@@ -188,7 +188,7 @@ export function Footer() {
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
-            <p>© 2024 Nini's Knits. All rights reserved. Made with ❤️ and countless hours of love.</p>
+            <p>© 2024 Snug.crochet.by.nini. All rights reserved. Made with ❤️ and countless hours of love.</p>
             <div className="flex space-x-6 mt-4 sm:mt-0">
               <motion.a
                 href="#"

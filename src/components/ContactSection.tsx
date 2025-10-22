@@ -3,7 +3,7 @@ import { Mail, Instagram, MapPin, Clock } from 'lucide-react';
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-purple-50 to-pink-50">
+    <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-purple-50 to-pink-50 scroll-mt-20 md:scroll-mt-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -14,7 +14,7 @@ export function ContactSection() {
         >
           <span className="text-purple-500 tracking-wide mb-4 block">Get In Touch</span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl mb-6 bg-gradient-to-r from-gray-900 via-pink-600 to-purple-600 bg-clip-text text-transparent">
-            Contact Nini's Knits
+            Contact Snug.crochet.by.nini
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Ready to bring your crochet dreams to life? Get in touch for custom orders, 
@@ -34,7 +34,7 @@ export function ContactSection() {
             {
               icon: Mail,
               title: "Email",
-              content: "hello@ninisknits.com",
+              content: "snug.crochet.by.nini@gmail.com",
               description: "Send us your questions"
             },
             {

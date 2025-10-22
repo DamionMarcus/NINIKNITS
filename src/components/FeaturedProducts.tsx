@@ -30,7 +30,7 @@ export function FeaturedProducts({ onNavigateToProducts }: FeaturedProductsProps
   };
 
   return (
-    <section id="products" className="py-12 md:py-20 bg-gradient-to-b from-white to-purple-50/30">
+    <section id="products" className="py-16 md:py-24 bg-gradient-to-b from-white to-purple-50/30 scroll-mt-20 md:scroll-mt-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

@@ -36,7 +36,7 @@ export function ProductCard({
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-6 lg:gap-12 items-center`}
+      className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 items-center max-w-7xl mx-auto`}
     >
       {/* Product Image */}
       <motion.div
@@ -46,7 +46,7 @@ export function ProductCard({
         onClick={onClick}
         className="relative cursor-pointer group lg:w-1/2"
       >
-        <div className="relative aspect-[3/4] sm:aspect-square lg:aspect-[4/3] overflow-hidden rounded-2xl shadow-lg max-w-sm mx-auto lg:max-w-none">
+        <div className="relative aspect-[4/5] sm:aspect-square lg:aspect-[4/3] overflow-hidden rounded-2xl shadow-lg w-full max-w-xs sm:max-w-sm lg:max-w-none">
           <ImageWithFallback
             src={image}
             alt={name}

@@ -34,7 +34,7 @@ export function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-12 md:py-20 bg-white">
+    <section id="about" className="py-12 md:py-20 bg-white scroll-mt-20 md:scroll-mt-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Content */}
@@ -51,7 +51,7 @@ export function AboutSection() {
               viewport={{ once: true }}
               className="mb-6"
             >
-              <span className="text-pink-500 tracking-wide">About Nini's Knits</span>
+              <span className="text-pink-500 tracking-wide">About Snug.crochet.by.nini</span>
             </motion.div>
 
             <motion.h2

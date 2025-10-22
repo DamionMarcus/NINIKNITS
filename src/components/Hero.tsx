@@ -12,7 +12,7 @@ export function Hero({ onNavigateToProducts }: HeroProps) {
   const { elementRef: contentRef, isVisible: contentVisible } = useScrollAnimation();
   const { elementRef: imageRef, isVisible: imageVisible } = useScrollAnimation();
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-24">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-gradient-to-br from-pink-100 to-purple-100" />
@@ -60,7 +60,7 @@ export function Hero({ onNavigateToProducts }: HeroProps) {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-4 lg:mb-6 bg-gradient-to-r from-gray-900 via-pink-600 to-purple-600 bg-clip-text text-transparent leading-tight"
             >
-              Welcome to Nini's Knits
+              Welcome to Snug.crochet.by.nini
               <br />
               <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">Where Dreams Come to Life</span>
             </motion.h1>
