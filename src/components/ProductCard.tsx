@@ -36,7 +36,7 @@ export function ProductCard({
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} gap-3 md:gap-6 mb-6 md:mb-12`}
+      className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} gap-2 sm:gap-3 md:gap-6 mb-4 sm:mb-6 md:mb-12`}
     >
       {/* Product Image */}
       <motion.div
@@ -46,7 +46,7 @@ export function ProductCard({
         onClick={onClick}
         className="relative cursor-pointer group md:w-1/2"
       >
-        <div className="relative aspect-[4/3] md:aspect-[4/3] overflow-hidden rounded-xl md:rounded-2xl shadow-lg">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg">
           <ImageWithFallback
             src={image}
             alt={name}
@@ -70,14 +70,14 @@ export function ProductCard({
           </motion.div>
 
           {/* Badges */}
-          <div className="absolute top-3 left-3 flex flex-col space-y-2">
+          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex flex-col space-y-1 sm:space-y-2">
             {isNew && (
               <Badge className="bg-pink-500 text-white shadow-lg">New</Badge>
             )}
           </div>
 
           {/* Rating */}
-          <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center space-x-1 shadow-lg">
+          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-white/90 backdrop-blur-sm rounded-full px-2 sm:px-3 py-0.5 sm:py-1 flex items-center space-x-1 shadow-md sm:shadow-lg">
             <Star className="w-4 h-4 text-yellow-400 fill-current" />
             <span className="text-sm">{rating}</span>
           </div>
@@ -91,17 +91,17 @@ export function ProductCard({
         transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
         className="md:w-1/2 flex flex-col justify-center"
       >
-        <div className="space-y-3 md:space-y-4">
+        <div className="space-y-2 sm:space-y-3 md:space-y-4">
           {/* Name and Price */}
           <div>
-            <h3 className="text-lg md:text-2xl mb-1 md:mb-2 hover:text-pink-500 transition-colors cursor-pointer line-clamp-2" onClick={onClick}>
+            <h3 className="text-base sm:text-lg md:text-2xl mb-0.5 sm:mb-1 md:mb-2 hover:text-pink-500 transition-colors cursor-pointer line-clamp-2" onClick={onClick}>
               {name}
             </h3>
-            <div className="text-xl md:text-3xl text-pink-500">{price}</div>
+            <div className="text-lg sm:text-xl md:text-3xl text-pink-500">{price}</div>
           </div>
 
           {/* Description */}
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base line-clamp-2 md:line-clamp-none">
+          <p className="text-muted-foreground leading-relaxed text-xs sm:text-sm md:text-base line-clamp-2 md:line-clamp-none">
             {description}
           </p>
 
@@ -124,7 +124,7 @@ export function ProductCard({
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={onClick}
-            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-lg hover:shadow-lg transition-all duration-300 w-full md:w-auto text-sm md:text-base"
+            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 sm:px-6 md:px-8 py-1.5 sm:py-2 md:py-3 rounded-lg hover:shadow-lg transition-all duration-300 w-full md:w-auto text-xs sm:text-sm md:text-base"
           >
             View Details
           </motion.button>

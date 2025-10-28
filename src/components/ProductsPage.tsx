@@ -120,7 +120,7 @@ export function ProductsPage({ onBack }: ProductsPageProps) {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: headerVisible ? 1 : 0, y: headerVisible ? 0 : -30 }}
         transition={{ duration: 0.6 }}
-        className="bg-white border-b border-pink-200 sticky top-16 z-40"
+        className="bg-white border-b border-pink-200 sticky top-0 z-40"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
@@ -159,16 +159,16 @@ export function ProductsPage({ onBack }: ProductsPageProps) {
         </div>
       </motion.div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         {/* Filters */}
         <motion.div
           ref={filtersRef}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: filtersVisible ? 1 : 0, y: filtersVisible ? 0 : 30 }}
           transition={{ duration: 0.6 }}
-          className="mb-8"
+          className="mb-4 sm:mb-6 md:mb-8"
         >
-          <div className="bg-white rounded-xl p-4 md:p-6 shadow-lg border border-pink-100">
+          <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 shadow-md md:shadow-lg border border-pink-100">
             <div className="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
               {/* Search */}
               <div className="relative flex-1 max-w-md">
@@ -200,7 +200,7 @@ export function ProductsPage({ onBack }: ProductsPageProps) {
         </motion.div>
 
         {/* Products */}
-        <div className={`space-y-6 ${viewMode === 'grid' ? 'md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 md:space-y-0' : ''}`}>
+        <div className={`space-y-4 sm:space-y-5 md:space-y-6 ${viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 space-y-0' : ''}`}>
           {filteredProducts.map((product, index) => (
             <motion.div
               key={product.id}

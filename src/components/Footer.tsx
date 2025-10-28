@@ -26,55 +26,7 @@ export function Footer() {
 
   return (
     <footer id="contact" className="bg-gradient-to-b from-pink-50 to-purple-100">
-      {/* Newsletter Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="border-b border-pink-200"
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-          <div className="max-w-2xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="flex items-center justify-center space-x-2 mb-4"
-            >
-              <Heart className="w-6 h-6 text-pink-500" />
-              <span className="text-pink-500 tracking-wide">Stay Connected</span>
-            </motion.div>
-            
-            <h3 className="text-2xl sm:text-3xl mb-4">
-              Join Our Crafting Community
-            </h3>
-            
-            <p className="text-muted-foreground mb-8">
-              Be the first to discover new patterns, exclusive designs, and behind-the-scenes stories. 
-              Plus, get 10% off your first order!
-            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-            >
-              <Input
-                type="email"
-                placeholder="Enter your email address"
-                className="flex-1"
-              />
-              <Button className="bg-pink-500 hover:bg-pink-600">
-                Subscribe
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
 
       {/* Main Footer */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
