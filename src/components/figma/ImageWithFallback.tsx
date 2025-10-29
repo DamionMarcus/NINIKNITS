@@ -5,9 +5,14 @@ const ERROR_IMG_SRC =
 
 export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElement>) {
   const [didError, setDidError] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const handleError = () => {
     setDidError(true)
+  }
+
+  const handleLoad = () => {
+    setIsLoaded(true)
   }
 
   const { src, alt, style, className, ...rest } = props
@@ -22,6 +27,16 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
       </div>
     </div>
   ) : (
-    <img src={src} alt={alt} className={className} style={style} {...rest} onError={handleError} />
+    <img 
+      src={src} 
+      alt={alt} 
+      className={`${className || ''} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+      style={style} 
+      {...rest} 
+      onError={handleError}
+      onLoad={handleLoad}
+      loading="lazy"
+    />
   )
 }
+

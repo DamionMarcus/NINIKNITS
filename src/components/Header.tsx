@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Menu, X, Heart, ShoppingBag } from 'lucide-react';
-import { Button } from './ui/button';
+import { Menu, X, ShoppingBag } from 'lucide-react';
 
 interface HeaderProps {
   onNavigateToProducts?: () => void;
@@ -10,6 +9,29 @@ interface HeaderProps {
 
 export function Header({ onNavigateToProducts, onNavigateToHome }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleNavClick = (item: any) => {
+    if (item.action === 'home' && onNavigateToHome) {
+      onNavigateToHome();
+    } else if (item.action === 'products' && onNavigateToProducts) {
+      onNavigateToProducts();
+    } else if (item.href) {
+      const element = document.querySelector(item.href);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({ top: elementPosition - headerOffset, behavior: 'smooth' });
+      }
+    }
+    setIsMenuOpen(false);
+  };
+
+  const navItems = [
+    { name: 'Home', action: 'home' },
+    { name: 'Products', action: 'products' },
+    { name: 'About', href: '#about' },
+    { name: 'Contact', href: '#contact' }
+  ];
 
   return (
     <motion.header 
@@ -23,7 +45,8 @@ export function Header({ onNavigateToProducts, onNavigateToHome }: HeaderProps) 
           {/* Logo */}
           <motion.div 
             whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-2 cursor-pointer"
+            onClick={() => onNavigateToHome?.()}
           >
             <img src="/images/animated-cat-logo.png" alt="Snug.crochet.by.nini Logo" className="w-10 h-10" />
             <span className="text-xl tracking-wide font-bold text-purple-600">Snug.crochet.by.nini</span>
@@ -31,24 +54,10 @@ export function Header({ onNavigateToProducts, onNavigateToHome }: HeaderProps) 
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {[
-              { name: 'Home', href: '#home' },
-              { name: 'Products', action: 'products' },
-              { name: 'About', href: '#about' },
-              { name: 'Contact', href: '#contact' }
-            ].map((item) => (
+            {navItems.map((item) => (
               <motion.button
                 key={item.name}
-                onClick={() => {
-                  if (item.action === 'products' && onNavigateToProducts) {
-                    onNavigateToProducts();
-                  } else if (item.href) {
-                    const element = document.querySelector(item.href);
-                    const headerOffset = 80; // Approximate header height
-                    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-                    window.scrollTo({ top: elementPosition - headerOffset, behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => handleNavClick(item)}
                 className="text-foreground hover:text-pink-500 transition-colors relative"
                 whileHover={{ y: -2 }}
               >
@@ -64,16 +73,14 @@ export function Header({ onNavigateToProducts, onNavigateToHome }: HeaderProps) 
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-              <ShoppingBag className="w-6 h-6 text-foreground hover:text-pink-500 cursor-pointer transition-colors" />
-            </motion.div>
-            <Button 
-              variant="default" 
-              className="bg-pink-500 hover:bg-pink-600"
-              onClick={onNavigateToProducts}
+            <motion.div 
+              whileHover={{ scale: 1.1 }} 
+              whileTap={{ scale: 0.95 }}
+              className="cursor-pointer"
+              title="View Cart"
             >
-              Shop Now
-            </Button>
+              <ShoppingBag className="w-6 h-6 text-foreground hover:text-pink-500 transition-colors" />
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -94,46 +101,20 @@ export function Header({ onNavigateToProducts, onNavigateToHome }: HeaderProps) 
           className="md:hidden overflow-hidden"
         >
           <div className="py-4 space-y-4">
-            {[
-              { name: 'Home', href: '#home' },
-              { name: 'Products', action: 'products' },
-              { name: 'About', href: '#about' },
-              { name: 'Contact', href: '#contact' }
-            ].map((item) => (
+            {navItems.map((item) => (
               <motion.button
                 key={item.name}
-                onClick={() => {
-                  if (item.action === 'products' && onNavigateToProducts) {
-                    onNavigateToProducts();
-                  } else if (item.href) {
-                    const element = document.querySelector(item.href);
-                    const headerOffset = 80; // Approximate header height
-                    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-                    window.scrollTo({ top: elementPosition - headerOffset, behavior: 'smooth' });
-                  }
-                  setIsMenuOpen(false);
-                }}
+                onClick={() => handleNavClick(item)}
                 className="block w-full text-left text-foreground hover:text-pink-500 transition-colors"
                 whileHover={{ x: 10 }}
               >
                 {item.name}
               </motion.button>
             ))}
-            <div className="pt-4 border-t border-border">
-              <Button 
-                variant="default" 
-                className="w-full bg-pink-500 hover:bg-pink-600"
-                onClick={() => {
-                  onNavigateToProducts?.();
-                  setIsMenuOpen(false);
-                }}
-              >
-                Shop Now
-              </Button>
-            </div>
           </div>
         </motion.div>
       </div>
     </motion.header>
   );
 }
+
