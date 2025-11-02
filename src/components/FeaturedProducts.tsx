@@ -2,89 +2,25 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ProductCard } from './ProductCard';
 import { ProductModal } from './ProductModal';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-
-const featuredProducts = [
-  {
-    id: '1',
-    name: 'Sunset Dreams Blanket',
-    price: '$89.99',
-    image: 'https://images.unsplash.com/photo-1633204094618-1d4623e365f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwYmxhbmtldCUyMGNvenl8ZW58MXx8fHwxNzU5MzI5OTg0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'A cozy, oversized blanket perfect for snuggling on cold winter nights.',
-    story: 'Inspired by watching countless sunsets from my grandmother\'s porch, this blanket captures the warmth and comfort of those precious moments. Each stitch represents a memory, woven together with sunset hues that bring peace and tranquility to any space.',
-    craftTime: '3 weeks',
-    rating: 4.9,
-    isNew: true
-  },
-  {
-    id: '2',
-    name: 'Autumn Harvest Sweater',
-    price: '$124.99',
-    image: 'https://images.unsplash.com/photo-1679847628912-4c3e7402abc7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwc3dlYXRlciUyMGhhbmRtYWRlfGVufDF8fHx8MTc1OTMyOTk4Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'Hand-knitted sweater with intricate cable patterns and earthy tones.',
-    story: 'Born from a walk through autumn woods, this sweater embodies the crisp air and golden leaves of fall. The cable pattern mimics tree branches reaching skyward, while the rich browns and oranges celebrate nature\'s most beautiful season.',
-    craftTime: '2 weeks',
-    rating: 4.8,
-    isNew: false
-  },
-  {
-    id: '3',
-    name: 'Winter Wonderland Scarf',
-    price: '$34.99',
-    image: 'https://images.unsplash.com/photo-1457545195570-67f207084966?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwc2NhcmYlMjB3aW50ZXJ8ZW58MXx8fHwxNzU5MjQ1ODE0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'Soft, luxurious scarf with delicate snowflake patterns throughout.',
-    story: 'Created during the first snowfall of winter, each snowflake pattern is unique - just like real snow. This scarf holds the magic of winter mornings when everything is blanketed in pristine white, bringing that serene beauty wherever you go.',
-    craftTime: '5 days',
-    rating: 4.7,
-    isNew: true
-  },
-  {
-    id: '4',
-    name: 'Little Angel Baby Hat',
-    price: '$18.99',
-    image: 'https://images.unsplash.com/photo-1757583012114-0a48ae0a6e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwYmFieSUyMGhhdHxlbnwxfHx8fDE3NTkzMjk5ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'Adorable baby hat with soft texture, perfect for newborns to 6 months.',
-    story: 'Every baby deserves to be wrapped in love from their very first day. This hat was designed with the softest yarn and gentlest stitches, created while thinking of new beginnings and the precious moments that mark a little one\'s arrival into the world.',
-    craftTime: '2 days',
-    rating: 5.0,
-    isNew: false
-  },
-  {
-    id: '5',
-    name: 'Bohemian Market Bag',
-    price: '$42.99',
-    image: 'https://images.unsplash.com/photo-1581672203752-b7851b1878da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwYmFnJTIwdG90ZXxlbnwxfHx8fDE3NTkyNDM0MTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'Spacious, eco-friendly market bag with sturdy handles and beautiful texture.',
-    story: 'Inspired by Saturday morning farmers markets and the dream of sustainable living, this bag was born from a passion for reducing waste. Each mesh stitch allows your fresh produce to breathe while making a statement about caring for our planet.',
-    craftTime: '1 week',
-    rating: 4.6,
-    isNew: false
-  },
-  {
-    id: '6',
-    name: 'Zen Garden Meditation Cushion',
-    price: '$67.99',
-    image: 'https://images.unsplash.com/photo-1630238083594-43d3846190d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwaG9tZSUyMGRlY29yfGVufDF8fHx8MTc1OTI0NTg1NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'Comfortable meditation cushion with removable cover and calming earth tones.',
-    story: 'Crafted during my own journey into mindfulness, this cushion represents the peace found in quiet moments. The earth tones ground you to nature while the soft texture supports your practice, creating a sacred space wherever you choose to sit and breathe.',
-    craftTime: '4 days',
-    rating: 4.8,
-    isNew: true
-  }
-];
+import { products } from '../data/products';
+import { Button } from './ui/button';
 
 interface FeaturedProductsProps {
   onNavigateToProducts?: () => void;
 }
 
 export function FeaturedProducts({ onNavigateToProducts }: FeaturedProductsProps) {
-  const [selectedProduct, setSelectedProduct] = useState<typeof featuredProducts[0] | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { elementRef: headerRef, isVisible: headerVisible } = useScrollAnimation();
   const { elementRef: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
 
-  const handleProductClick = (product: typeof featuredProducts[0]) => {
+  // Display first 6 products as featured
+  const featuredProductsList = products.slice(0, 6);
+
+  const handleProductClick = (product: typeof products[0]) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
@@ -129,14 +65,79 @@ export function FeaturedProducts({ onNavigateToProducts }: FeaturedProductsProps
 
         {/* Products List - Mobile First Layout */}
         <div className="space-y-8 md:space-y-0">
-          {featuredProducts.map((product, index) => (
-            <ProductCard
+          {featuredProductsList.map((product, index) => (
+            <motion.div
               key={product.id}
-              {...product}
-              index={index}
-              isReversed={index % 2 === 1}
-              onClick={() => handleProductClick(product)}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className={`grid md:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? 'md:direction-rtl' : ''}`}
+            >
+              {/* Image */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className={`relative ${index % 2 === 1 ? 'md:order-2' : ''}`}
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-auto rounded-lg shadow-lg cursor-pointer"
+                  onClick={() => handleProductClick(product)}
+                />
+              </motion.div>
+
+              {/* Content */}
+              <div className={`${index % 2 === 1 ? 'md:order-1' : ''}`}>
+                <motion.div
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
+                    {product.name}
+                  </h3>
+                  
+                  <p className="text-lg text-pink-600 font-semibold mb-4">
+                    ${product.price}
+                  </p>
+
+                  <p className="text-gray-600 mb-6">
+                    {product.description}
+                  </p>
+
+                  <div className="bg-pink-50 border-l-4 border-pink-500 p-4 mb-6">
+                    <h4 className="text-pink-600 font-semibold mb-2">The Story Behind</h4>
+                    <p className="text-gray-700 text-sm">
+                      {product.story}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center">
+                      <span className="text-yellow-400">★</span>
+                      <span className="ml-2 text-gray-700 font-semibold">{product.rating}</span>
+                    </div>
+                    {product.isNew && (
+                      <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        New
+                      </span>
+                    )}
+                  </div>
+
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => handleProductClick(product)}
+                    className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                  >
+                    View Details
+                  </motion.button>
+                </motion.div>
+              </div>
+            </motion.div>
           ))}
         </div>
 
@@ -148,26 +149,29 @@ export function FeaturedProducts({ onNavigateToProducts }: FeaturedProductsProps
           transition={{ duration: 0.6 }}
           className="text-center mt-12 md:mt-16"
         >
-          <p className="text-muted-foreground mb-6">
+          <p className="text-lg text-gray-600 mb-6">
             Love what you see? Explore our complete collection of handcrafted treasures.
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <Button
+            size="lg"
+            className="group bg-pink-500 hover:bg-pink-600"
             onClick={onNavigateToProducts}
-            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-3 rounded-lg hover:shadow-lg transition-all duration-300"
           >
-            View All Products
-          </motion.button>
+            Explore Full Collection
+            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Button>
         </motion.div>
+      </div>
 
-        {/* Product Modal */}
+      {/* Product Modal */}
+      {selectedProduct && (
         <ProductModal
           product={selectedProduct}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
         />
-      </div>
+      )}
     </section>
   );
 }
+

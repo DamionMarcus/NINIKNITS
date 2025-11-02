@@ -131,8 +131,8 @@ export function Hero({ onNavigateToProducts }: HeroProps) {
               className="relative z-10"
             >
               <ImageWithFallback
-                src="/images/IMG-20250926-WA0025.jpg"
-                alt="Shelly the Turtle crochet toy"
+                src="/images/1000463386.jpg"
+                alt="Sparky the Electric Wonder - Pikachu Plush"
                 className="w-full h-auto rounded-2xl shadow-2xl"
               />
             </motion.div>

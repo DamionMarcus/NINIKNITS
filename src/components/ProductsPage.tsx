@@ -6,85 +6,24 @@ import { Input } from './ui/input';
 import { ProductCard } from './ProductCard';
 import { ProductModal } from './ProductModal';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { products } from '../data/products';
 
-const allProducts = [
-  {
-    id: '1',
-    name: 'Sunset Dreams Blanket',
-    price: '$89.99',
-    image: 'https://images.unsplash.com/photo-1633204094618-1d4623e365f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwYmxhbmtldCUyMGNvenl8ZW58MXx8fHwxNzU5MzI5OTg0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'A cozy, oversized blanket perfect for snuggling on cold winter nights.',
-    story: 'Inspired by watching countless sunsets from my grandmother\'s porch, this blanket captures the warmth and comfort of those precious moments.',
-    craftTime: '3 weeks',
-    rating: 4.9,
-    category: 'Blankets',
-    isNew: true
-  },
-  {
-    id: '2',
-    name: 'Autumn Harvest Sweater',
-    price: '$124.99',
-    image: 'https://images.unsplash.com/photo-1679847628912-4c3e7402abc7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwc3dlYXRlciUyMGhhbmRtYWRlfGVufDF8fHx8MTc1OTMyOTk4Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'Hand-knitted sweater with intricate cable patterns and earthy tones.',
-    story: 'Born from a walk through autumn woods, this sweater embodies the crisp air and golden leaves of fall.',
-    craftTime: '2 weeks',
-    rating: 4.8,
-    category: 'Clothing'
-  },
-  {
-    id: '3',
-    name: 'Winter Wonderland Scarf',
-    price: '$34.99',
-    image: 'https://images.unsplash.com/photo-1457545195570-67f207084966?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwc2NhcmYlMjB3aW50ZXJ8ZW58MXx8fHwxNzU5MjQ1ODE0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'Soft, luxurious scarf with delicate snowflake patterns throughout.',
-    story: 'Created during the first snowfall of winter, each snowflake pattern is unique - just like real snow.',
-    craftTime: '5 days',
-    rating: 4.7,
-    category: 'Accessories',
-    isNew: true
-  },
-  {
-    id: '4',
-    name: 'Little Angel Baby Hat',
-    price: '$18.99',
-    image: 'https://images.unsplash.com/photo-1757583012114-0a48ae0a6e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwYmFieSUyMGhhdHxlbnwxfHx8fDE3NTkzMjk5ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'Adorable baby hat with soft texture, perfect for newborns to 6 months.',
-    story: 'Every baby deserves to be wrapped in love from their very first day.',
-    craftTime: '2 days',
-    rating: 5.0,
-    category: 'Baby'
-  },
-  {
-    id: '5',
-    name: 'Bohemian Market Bag',
-    price: '$42.99',
-    image: 'https://images.unsplash.com/photo-1581672203752-b7851b1878da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwYmFnJTIwdG90ZXxlbnwxfHx8fDE3NTkyNDM0MTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'Spacious, eco-friendly market bag with sturdy handles and beautiful texture.',
-    story: 'Inspired by Saturday morning farmers markets and the dream of sustainable living.',
-    craftTime: '1 week',
-    rating: 4.6,
-    category: 'Bags'
-  },
-  {
-    id: '6',
-    name: 'Zen Garden Meditation Cushion',
-    price: '$67.99',
-    image: 'https://images.unsplash.com/photo-1630238083594-43d3846190d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcm9jaGV0JTIwaG9tZSUyMGRlY29yfGVufDF8fHx8MTc1OTI0NTg1NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-    description: 'Comfortable meditation cushion with removable cover and calming earth tones.',
-    story: 'Crafted during my own journey into mindfulness, this cushion represents the peace found in quiet moments.',
-    craftTime: '4 days',
-    rating: 4.8,
-    category: 'Home Decor',
-    isNew: true
-  }
-];
+// Map products to include category field
+const allProducts = products.map(product => ({
+  ...product,
+  price: `$${product.price}`,
+  category: product.category || 'Accessories',
+  rating: product.rating || 4.8,
+  craftTime: product.craftTime || 'Handcrafted',
+  isNew: product.isNew || false
+}));
 
 interface ProductsPageProps {
   onBack: () => void;
 }
 
 export function ProductsPage({ onBack }: ProductsPageProps) {
-  const [selectedProduct, setSelectedProduct] = useState<typeof allProducts[0] | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -93,7 +32,7 @@ export function ProductsPage({ onBack }: ProductsPageProps) {
   const { elementRef: headerRef, isVisible: headerVisible } = useScrollAnimation();
   const { elementRef: filtersRef, isVisible: filtersVisible } = useScrollAnimation();
 
-  const categories = ['All', ...new Set(allProducts.map(p => p.category))];
+  const categories = ['All', 'Totes', 'Plushes', 'Dolls', 'Accessories'];
 
   const filteredProducts = allProducts.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
